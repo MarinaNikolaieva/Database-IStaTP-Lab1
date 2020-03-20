@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Lab1.Event>
+
+@{
+    ViewData["Title"] = "Events";
+}
+
+<h1>Events</h1>
+
+<p>
+    <a @Html.ActionLink("Add new event", "Create")</a>
+</p>
+<table class="table">
+    <thead style="background: orange;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EventName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventPrice)
+            </td>
+            <td>
+                <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a type="button" class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id">Pizzerias for event</a> |
+                <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,48 @@
+﻿@model Lab1.Pizzeria
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<p>
+    @Html.ActionLink("View animatronics in this pizzeria", "Index", "Animatronics", new { id = ViewBag.PizzeriaId, name = ViewBag.PizzeriaName })
+</p>
+<p>
+    @Html.ActionLink("View menu of the pizzeria", "Meals", new { pizzeriaId = ViewBag.PizzeriaId })
+</p>
+<p>
+    @Html.ActionLink("View events of the pizzeria", "Events", new { pizzeriaId = ViewBag.PizzeriaId })
+</p>
+<p>
+    @Html.ActionLink("View reviews for the pizzeria", "Index", "Reviews", new { id = ViewBag.PizzeriaId, name = ViewBag.PizzeriaName, userId = 0 })
+</p>
+
+<div>
+    <h4>Pizzeria</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PizzeriaName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PizzeriaName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PizzeriaInfo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PizzeriaInfo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

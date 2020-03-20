@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Lab1.Category>
+
+@{
+    ViewData["Title"] = "Meal categories";
+}
+
+<h1>Category list</h1>
+
+<p>
+    <a asp-action="Create">Add new category</a>
+</p>
+<table class="table">
+    <thead style="background: orange;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a type="button" class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id">Meals in category</a> |
+                <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div class="container">
+    <div id="chart1"></div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            $.get('/api/MealCategs/JsonData', function (jsonData) {
+                data = google.visualization.arrayToDataTable(jsonData, false);
+                var option = {
+                    title: "Meal number by categories comparison",
+                    width: 500,
+                    height: 500
+                };
+                chart = new google.visualization.PieChart(document.getElementById('chart1'));
+                chart.draw(data, option);
+            })
+        }
+    </script>
+}

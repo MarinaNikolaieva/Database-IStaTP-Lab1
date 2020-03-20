@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Lab1.Animatronic>
+
+@{
+    ViewData["Title"] = "Animatronics";
+}
+
+<h1>Animatronics in @ViewBag.PizzeriaName</h1>
+
+<p>
+    @Html.ActionLink("Add new animatronic", "Create", new { pizzeriaId = ViewBag.PizzeriaId })
+</p>
+
+<p>
+    @Html.ActionLink("View all species", "Index", "Species")
+</p>
+<table class="table">
+    <thead style="background: orange;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AnimatronicName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnimatronicInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pizzeria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Species)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnimatronicName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnimatronicInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pizzeria.PizzeriaName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Species.SpeciesName)
+            </td>
+            <td>
+                <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a type="button" class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

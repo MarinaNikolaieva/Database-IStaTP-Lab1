@@ -1,0 +1,41 @@
+﻿@model Lab1.PizzeriaMeal
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PizzeriaMeal</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Meal.MealName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Meal.MealName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pizzeria)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pizzeria.PizzeriaName)
+        </dd>
+        @foreach(PizzeriaMeal pizzeria in ViewBag.PizzeriasList)
+        {
+            <dd class="col-sm-10">
+                <text>@pizzeria.Pizzeria.PizzeriaName</text>
+            </dd>
+            if (ViewBag.PizzeriasList[ViewBag.Count - 1] != pizzeria)
+            {
+                <dt class="col-sm-2">
+                </dt>
+            }
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id"asp-route-pizzeriaId="@ViewBag.PizzeriaId">Edit</a> |
+    <a asp-action="Index"asp-route-id="@ViewBag.PizzeriaId">Back to List</a>
+</div>

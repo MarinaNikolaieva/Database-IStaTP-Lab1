@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Lab1.Meal>
+
+@{
+    ViewData["Title"] = "Meals";
+}
+
+<h1>Meals in @ViewBag.CategoryName category</h1>
+
+<p>
+    @Html.ActionLink("Add new meal", "Create", new { categoryId = ViewBag.CategoryId })
+</p>
+<table class="table">
+    <thead style="background: orange;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MealName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MealInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MealPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MealName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MealInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MealPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a type="button" class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id">Pizzerias for meal</a> |
+                <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

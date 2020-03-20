@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Lab1.Species>
+
+@{
+    ViewData["Title"] = "Animatronic species";
+}
+
+<h1>Species</h1>
+
+<p>
+    <a asp-action="Create">Add new species</a>
+</p>
+<table class="table">
+    <thead style="background: orange;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SpeciesName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpeciesName)
+            </td>
+            <td>
+                <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a type="button" class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

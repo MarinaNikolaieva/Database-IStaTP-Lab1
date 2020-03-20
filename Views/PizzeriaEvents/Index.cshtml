@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Lab1.PizzeriaEvent>
+
+@{
+    ViewData["Title"] = "Events in pizzeria";
+}
+
+<h1>Event in pizzerias</h1>
+
+<p>
+    <a @Html.ActionLink("Add new pizzeria for the event", "Create", new { eventId = ViewBag.EventId })</a>
+</p>
+<table class="table">
+    <thead style="background: orange;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Event)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pizzeria)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Event.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pizzeria.PizzeriaName)
+            </td>
+            <td>
+                <a type="button" class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
